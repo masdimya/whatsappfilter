@@ -15,7 +15,7 @@ def save(url,filename):
         r.raw.decode_content = True
         
         # Open a local file with wb ( write binary ) permission.
-        with open("static/"+filename,'wb') as f:
+        with open("static/raw/"+filename,'wb') as f:
             shutil.copyfileobj(r.raw, f)
             
         print('Image sucessfully Downloaded: ',filename)
