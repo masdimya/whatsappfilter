@@ -21,6 +21,7 @@ CORS(my_awesome_app)
 def index():
 	
 	if request.method == 'GET':
+            filter_img("dimya.jpg")
             return "hahsdhashd"
 			
 
@@ -48,11 +49,14 @@ def index():
             save(url,filename)
             filter_img(filename)
             
-            url_img = "https://whatsapp-filter.herokuapp.com/static/img/"+filename  
-            
-            # # SendMessage Ke ChatApi
-            if data['fromMe'] == False:
-                r = requests.post(wa, data = {"phone": target,"body": url_img,"filename" : filename})
+            caption = ['❤💙💚💛💜','😂😂😂😂😂','🌚🌚😁😂😎']
+            for i in range(1,4):
+                url_img = "https://whatsapp-filter.herokuapp.com/static/img/"+str(i)+"_"+filename  
+                
+                # # SendMessage Ke ChatApi
+                if data['fromMe'] == False:
+                    r = requests.post(wa, data = {"phone": target,"body": url_img,"filename" : filename,"caption":caption[i-1] })
+                
             return '{"type": "chat","body": "Mohon tunggu sebentar ya 🤖"}'
 
 if __name__ == '__main__':
