@@ -7,6 +7,7 @@ import json
 import requests
 
 from modules.saveimage import save
+from modules.filter import filter_img
 
 
 
@@ -45,8 +46,9 @@ def index():
             filename = target+".jpg"
 
             save(url,filename)
+            filter_img(filename)
             
-            url_img = "https://whatsapp-filter.herokuapp.com/static/raw/"+filename  
+            url_img = "https://whatsapp-filter.herokuapp.com/static/img/"+filename  
             
             # # SendMessage Ke ChatApi
             if data['fromMe'] == False:
