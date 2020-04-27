@@ -1,0 +1,19 @@
+{
+    "TYPE": "chatapi",
+    "PROVIDER": {
+        "WHATSPIE": {
+            "DEVICE_NUMBER": "6285648178175",
+            "API": "https://app.whatspie.com/api/messages",
+            "TOKEN": "WGgHQhBN3JpWvyBjkBZgZILDQ3Z420QGmZhLQmNXgQSQd0ot2k"
+        },
+        "CHATAPI": {
+            "URL": "https://api.chat-api.com",
+            "INSTANCE": "instance121218",
+            "TOKEN": "wpxus2xfvo89gwja"
+        },
+        "SIMSIMI": {
+            "URL": "URL SIMSIM HERE ",
+            "TOKEN": "simsimikey 1"
+        }
+    }
+}
