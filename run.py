@@ -4,9 +4,10 @@ from flask_cors import CORS
 from OpenSSL import SSL
 import os
 import json
-# connecting ot service api whatspie
 import requests
-# from flask_api import FlaskAPI, status, exception
+
+from modules.saveimage import save
+
 
 
 my_awesome_app = Flask(__name__)
@@ -19,7 +20,8 @@ CORS(my_awesome_app)
 def index():
 	
 	if request.method == 'GET':
-			return "masuk"
+            return "hahsdhashd"
+			
 
 	if request.method == 'POST':
             print(request.get_json())
@@ -28,23 +30,27 @@ def index():
             instance = my_awesome_app.config['PROVIDER']['CHATAPI']['INSTANCE']
             token 	 = my_awesome_app.config['PROVIDER']['CHATAPI']['TOKEN']
 
-            wa = url +"/"+ instance +"/sendMessage?token=" +token
+            wa = url +"/"+ instance +"/sendFile?token=" +token
             
-            #  Hook Target Dan Pesan Yang Dikirim
-            # try:
-            #     data = request.get_json()['messages'][0]
-            # except:
-            #     data = request.get_json()
+            #Hook Target Dan Pesan Yang Dikirim
+            try:
+                data = request.get_json()['messages'][0]
+            except:
+                data = request.get_json()
             
             
             # #  Selcet Target Dan Pesan Dengan BotReply
-            # target = data["chatId"].split("@")[0]
-            # message = getBotReply(str(data["body"]).replace("*",""))
+            target   = data["chatId"].split("@")[0]
+            url      = data["body"]
+            filename = target+".jpg"
 
+            save(url,filename)
+            
+            url_img = "https://whatsapp-filter.herokuapp.com/static/raw/"+filename  
             
             # # SendMessage Ke ChatApi
-            # if data['fromMe'] == False:
-            #     r = requests.post(wa, data = {"phone": target,"body": message})
+            if data['fromMe'] == False:
+                r = requests.post(wa, data = {"phone": target,"body": url_img,"filename" : filename})
             return '{"type": "chat","body": "Mohon tunggu sebentar ya 🤖"}'
 
 if __name__ == '__main__':
